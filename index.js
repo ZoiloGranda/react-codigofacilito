@@ -3,20 +3,28 @@ import { render } from 'react-dom';
 import Hello from './Hello';
 import './style.css';
 
-function A(props){
-  //return <p>hola {props.nombre}</p>
-  return props.children
-}
+class Contador extends Component{
+  constructor(props){
+    super(props)
+    this.state={
+      contador:0
+    }
+  }
 
-function B(props){
-  return <p>{props.nombre}: 100</p>
-}
+  aumentar=()=>{
+      this.setState({
+        contador: this.state.contador+1
+      })
+    }
 
-class MiComponenteClase extends Component{
   render(){
-    return <p>Hola soy de la clase</p>
+    return (<div>
+    <p>{this.state.contador}</p> 
+    <button onClick={this.aumentar}>Aumentar</button>
+    </div>)
   }
 }
+
 
 class App extends Component {
   constructor() {
@@ -30,10 +38,7 @@ class App extends Component {
     let nombre="Zoilo"
     return (
       <div>
-        <A nombre={nombre}>
-        <p>hola desde props.children</p>
-        </A>
-        <B nombre={nombre}/>
+        <Contador/>
       </div>
     );
   }
