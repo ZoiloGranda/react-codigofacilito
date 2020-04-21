@@ -3,28 +3,47 @@ import { render } from 'react-dom';
 import Hello from './Hello';
 import './style.css';
 
-class Contador extends Component{
+class Formulario extends Component{
   constructor(props){
     super(props)
     this.state={
-      contador:0
+      email:'',
+      password:''
     }
   }
 
-  aumentar=()=>{
-      this.setState({
-        contador: this.state.contador+1
-      })
-    }
+  syncChanges(value, property){
+    let state = {}
+    state[property] = value
+    this.setState(state)
+
+  }
+
+  submitForm=()=>{
+    console.log(this.state)
+  }
 
   render(){
-    return (<div>
-    <p>{this.state.contador}</p> 
-    <button onClick={this.aumentar}>Aumentar</button>
-    </div>)
+    return(
+      <form>
+      <input
+      onChange={(ev)=>{this.syncChanges(ev.target.value,'email')}}
+      type="email"
+      value={this.state.email}
+      placeholder="Email"></input>
+      <input
+      onChange={(ev)=>{this.syncChanges(ev.target.value,'password')}}
+      type="password"
+      value={this.state.password} placeholder="Password"></input>
+      <div>
+      <button
+      onClick={this.submitForm}
+      value="Iniciar Sesion">Iniciar Sesion</button>
+      </div>
+      </form>
+    )
   }
 }
-
 
 class App extends Component {
   constructor() {
@@ -38,7 +57,7 @@ class App extends Component {
     let nombre="Zoilo"
     return (
       <div>
-        <Contador/>
+        <Formulario/>
       </div>
     );
   }
