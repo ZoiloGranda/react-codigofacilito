@@ -4,7 +4,8 @@ import Hello from './Hello';
 import './style.css';
 
 function A(props){
-  return <p>hola {props.nombre}</p>
+  //return <p>hola {props.nombre}</p>
+  return props.children
 }
 
 function B(props){
@@ -29,7 +30,9 @@ class App extends Component {
     let nombre="Zoilo"
     return (
       <div>
-        <A nombre={nombre}/>
+        <A nombre={nombre}>
+        <p>hola desde props.children</p>
+        </A>
         <B nombre={nombre}/>
       </div>
     );
