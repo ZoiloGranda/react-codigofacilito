@@ -1,29 +1,33 @@
-import React, { Component } from 'react';
-import { render } from 'react-dom';
-import Hello from './Hello';
-import './style.css';
+import React, { Component } from "react";
+import { render } from "react-dom";
+import Hello from "./Hello";
+import "./style.css";
 
 class Blog extends Component {
-  constructor(props){
-    super(props)
-    this.state={
-       articles :[
-         'Mi primer componente en React',
-         'Angular vs React vs Vue',
-         'Que es Nodejs'
-        ]
-    }
+  constructor(props) {
+    super(props);
+    this.state = {
+      articles: []
+    };
   }
+
+  componentDidMount(){
+    let promesa = fetch('https://jsonplaceholder.typicode.com/posts')
+    promesa.then(response => response.json()).then(data=>{
+      this.setState({
+        articles:data
+      })
+    })
+  }
+
   render() {
     return (
       <div>
-      {
-        this.state.articles.map((title)=>{
-          return <p>{title}</p>
-        })
-      }
+        {this.state.articles.map(article => {
+          return <p>{article.title}</p>;
+        })}
       </div>
-  )
+    );
   }
 }
 
@@ -31,12 +35,12 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
-      name: 'React'
+      name: "React"
     };
   }
 
   render() {
-    let nombre = "Zoilo"
+    let nombre = "Zoilo";
     return (
       <div>
         <Blog />
@@ -45,4 +49,4 @@ class App extends Component {
   }
 }
 
-render(<App />, document.getElementById('root'));
+render(<App />, document.getElementById("root"));
