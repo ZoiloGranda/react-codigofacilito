@@ -1,36 +1,16 @@
-import React, { Component } from "react";
+import React, { Component, useState } from "react";
 import { render } from "react-dom";
 import Hello from "./Hello";
 import "./style.css";
 
-class Blog extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      articles: []
-    };
-  }
-
-  componentDidMount(){
-    let promesa = fetch('https://jsonplaceholder.typicode.com/posts')
-    promesa.then(response => response.json()).then(data=>{
-      this.setState({
-        articles:data
-      })
-    })
-  }
-
-  render() {
-    return (
-      <div>
-        {this.state.articles.map(article => {
-          return <div
-          className="card"
-          style={{}}><p>{article.title}</p></div>;
-        })}
-      </div>
-    );
-  }
+function Contador(props) {
+  const [contador, setContador]= useState(0);
+  return (
+    <div>
+      <p>Conteo: {contador}</p>
+      <button onClick={()=>setContador(contador+1)}>Aumentar</button>
+    </div>
+  );
 }
 
 class App extends Component {
@@ -45,7 +25,7 @@ class App extends Component {
     let nombre = "Zoilo";
     return (
       <div>
-        <Blog />
+        <Contador />
       </div>
     );
   }
