@@ -24,7 +24,9 @@ class Blog extends Component {
     return (
       <div>
         {this.state.articles.map(article => {
-          return <p>{article.title}</p>;
+          return <div
+          className="card"
+          style={{}}><p>{article.title}</p></div>;
         })}
       </div>
     );
